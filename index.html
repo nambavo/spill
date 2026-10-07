@@ -238,11 +238,28 @@
                 { value: 'zhuque', label: '朱雀仿宋' },
                 { value: 'yahei', label: '雅黑' }
             ];
+            var fontLoading = false;
+            var fontLoadToken = 0;
+            var startBtnOriginalText = startBtn.textContent;
             makeCustomSelect(
                 document.getElementById('fontSelectTrigger'),
                 document.getElementById('fontSelectValue'),
                 document.getElementById('fontSelectMenu'),
-                function () { return FONT_ITEMS; }
+                function () { return FONT_ITEMS; },
+                function (value) {
+                    if (!window.MatrixRain.isWebFont || !window.MatrixRain.isWebFont(value)) return;
+                    if (!window.MatrixRain.preloadFont) return;
+                    var token = ++fontLoadToken;
+                    fontLoading = true;
+                    startBtn.disabled = true;
+                    startBtn.textContent = '等待所选字体加载';
+                    window.MatrixRain.preloadFont(value).then(function () {
+                        if (token !== fontLoadToken) return;
+                        fontLoading = false;
+                        startBtn.textContent = startBtnOriginalText;
+                        startBtn.disabled = window.MatrixRain.isRunning();
+                    });
+                }
             );
 
             // ---------- 文本下拉：自动识别 data/ 下的 txt ----------
@@ -439,7 +456,7 @@
             // 运行状态联动开始按钮（动画期间禁用开始）
             setInterval(function () {
                 var running = window.MatrixRain.isRunning();
-                startBtn.disabled = running;
+                startBtn.disabled = running || fontLoading;
             }, 300);
 
             // 滑杆数值显示

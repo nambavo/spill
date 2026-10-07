@@ -313,6 +313,22 @@
         }
     }
 
+    // 预加载网络字体分片（选字体时调用，返回 Promise）
+    function preloadFont(fontFamily) {
+        var webFont = WEB_FONTS[fontFamily];
+        if (!webFont || !document.fonts || !document.fonts.load) {
+            return Promise.resolve();
+        }
+        var fontSize = state.options.fontSize;
+        var sample = (chars && chars.length) ? chars.slice(0, 1200) : FALLBACK_DAO.slice(0, 1200);
+        return document.fonts.load(fontSize + 'px "' + webFont + '"', sample).catch(function () {});
+    }
+
+    // 判断指定字体族是否为网络字体
+    function isWebFont(fontFamily) {
+        return !!WEB_FONTS[fontFamily];
+    }
+
     // ===================== 窗口尺寸自适应 =====================
     function handleResize() {
         if (!state.canvas || !state.isRunning) return;
@@ -377,6 +393,8 @@
         setOptions: setOptions,
         getOptions: getOptions,
         isRunning: function () { return state.isRunning; },
-        loadTextSource: loadTextSource
+        loadTextSource: loadTextSource,
+        preloadFont: preloadFont,
+        isWebFont: isWebFont
     };
 })();
