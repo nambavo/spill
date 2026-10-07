@@ -1,0 +1,641 @@
+/* ============================================================
+   fo/styles/style.css - 字母雨独立包样式
+   视觉基调：清新薄荷色系 / 浅色清爽风（区别于深色终端风）
+   ============================================================ */
+
+:root {
+    --mint-50:  #effdfa;
+    --mint-100: #d7f7f0;
+    --mint-200: #b0efe2;
+    --mint-300: #7fe3d0;
+    --mint-400: #4dd4bb;
+    --mint-500: #2ebfa6;
+    --mint-600: #1f9c88;
+    --mint-700: #1b7d6e;
+    --ink:      #173b36;
+    --ink-soft: #4d6a65;
+    --card:     #ffffff;
+    --radius:   16px;
+    --shadow:   0 12px 32px rgba(31, 156, 136, 0.14);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(1200px 600px at 15% -10%, var(--mint-200) 0%, transparent 60%),
+        radial-gradient(1000px 500px at 110% 110%, var(--mint-300) 0%, transparent 55%),
+        linear-gradient(160deg, var(--mint-50) 0%, var(--mint-100) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 20px 11px;
+}
+
+/* ---------- 主卡片 ---------- */
+.app {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 36px 40px 12px;
+    border: 1px solid rgba(127, 227, 208, 0.4);
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.app-logo {
+    width: 52px;
+    height: 52px;
+    flex: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--mint-400), var(--mint-600));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(46, 191, 166, 0.35);
+}
+
+.app-logo svg {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.app-subtitle {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--mint-200), transparent);
+    margin: 20px 0 24px;
+}
+
+/* ---------- 控制区 ---------- */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.control-label .hint {
+    font-weight: 400;
+    color: var(--mint-600);
+    font-size: 12px;
+}
+
+/* 字符集：分段选择 */
+.segmented {
+    display: flex;
+    background: var(--mint-50);
+    border: 1px solid var(--mint-200);
+    border-radius: 12px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.segmented label {
+    flex: 1;
+    text-align: center;
+    padding: 9px 10px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.segmented input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.segmented input:checked + span,
+.segmented label:has(input:checked) {
+    background: var(--card);
+    color: var(--mint-700);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(31, 156, 136, 0.18);
+}
+
+.segmented label:has(input:checked) {
+    background: var(--card);
+    color: var(--mint-700);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(31, 156, 136, 0.18);
+}
+
+/* 滑杆行 */
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.slider-row input[type="range"] {
+    flex: 1;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--mint-300), var(--mint-500));
+    outline: none;
+}
+
+.slider-row input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--mint-500);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(31, 156, 136, 0.3);
+}
+
+.slider-row input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--mint-500);
+    cursor: pointer;
+}
+
+.slider-value {
+    min-width: 56px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mint-700);
+    background: var(--mint-50);
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--mint-200);
+}
+
+/* 颜色选择 */
+.color-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.color-dot {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--mint-200);
+    background: var(--card);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--ink-soft);
+    transition: all 0.2s ease;
+}
+
+.color-dot:has(input:checked) {
+    border-color: var(--mint-500);
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(46, 191, 166, 0.22);
+}
+
+.color-dot input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* 开关行 */
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    flex: none;
+}
+
+.toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2; /* 确保盖过 track/thumb，可正常点击 */
+}
+
+.toggle .track {
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    background: var(--mint-200);
+    transition: background 0.25s ease;
+}
+
+.toggle .thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(23, 59, 54, 0.25);
+    transition: transform 0.25s ease;
+}
+
+.toggle input:checked + .track {
+    background: var(--mint-500);
+}
+
+.toggle input:checked ~ .thumb,
+.toggle input:checked + .track + .thumb {
+    transform: translateX(20px);
+}
+
+/* ---------- 操作按钮 ---------- */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--mint-400), var(--mint-600));
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(46, 191, 166, 0.4);
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(46, 191, 166, 0.5);
+}
+
+.btn-start:active {
+    transform: translateY(0);
+}
+
+.btn-start:disabled {
+    opacity: 0.55;
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* 全屏开关（取代原停止按钮位置） */
+.fullscreen-box {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--mint-200);
+    border-radius: 12px;
+    background: var(--card);
+    transition: all 0.2s ease;
+}
+
+.fullscreen-box:hover {
+    border-color: var(--mint-400);
+    box-shadow: 0 4px 14px rgba(46, 191, 166, 0.18);
+}
+
+.fullscreen-box .control-label {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+
+/* ---------- 快捷键提示 ---------- */
+.hint-box {
+    margin-top: 22px;
+    background: var(--mint-50);
+    border: 1px dashed var(--mint-300);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+}
+
+.hint-box strong {
+    color: var(--mint-700);
+}
+
+kbd {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 6px;
+    background: var(--card);
+    border: 1px solid var(--mint-300);
+    border-bottom-width: 2px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    color: var(--ink);
+}
+
+/* ---------- 页脚 ---------- */
+.app-footer {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    opacity: 0.8;
+}
+
+.app-footer a {
+    color: var(--mint-700);
+    text-decoration: none;
+}
+
+/* ---------- 字母雨 Toast（悬浮于动画之上） ---------- */
+.mrt-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translate(-50%, -80px);
+    background: rgba(23, 59, 54, 0.92);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 10001;
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.mrt-toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 560px) {
+    body {
+        padding: 24px 14px 28px;
+    }
+
+    .app {
+        padding: 26px 20px 24px;
+    }
+
+    .app-title {
+        font-size: 20px;
+    }
+
+    .btn {
+        padding: 13px 14px;
+        font-size: 14px;
+    }
+}
+
+/* ---------- 文本/字体下拉（自定义组件，展开菜单同样主题化） ---------- */
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    appearance: none;
+    background-color: var(--mint-50);
+    border: 1.5px solid var(--mint-300);
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--mint-700);
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.custom-select-trigger:hover,
+.custom-select-trigger.open {
+    border-color: var(--mint-500);
+    box-shadow: 0 2px 8px rgba(46, 191, 166, 0.18);
+}
+
+.custom-select-value {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-select-arrow {
+    flex: none;
+    color: var(--mint-600);
+    transition: transform 0.25s ease;
+}
+
+.custom-select-trigger.open .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+/* 展开菜单：薄荷主题完全自绘 */
+.custom-select-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: var(--card);
+    border: 1.5px solid var(--mint-200);
+    border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(31, 156, 136, 0.22);
+    padding: 6px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.custom-select-menu[hidden] {
+    display: none;
+}
+
+.custom-select-option {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.custom-select-option:hover {
+    background: var(--mint-100);
+    color: var(--ink);
+}
+
+.custom-select-option.selected {
+    background: var(--mint-100);
+    color: var(--mint-700);
+    font-weight: 700;
+}
+
+/* 菜单滚动条：主题化 */
+.custom-select-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-select-menu::-webkit-scrollbar-thumb {
+    background: var(--mint-300);
+    border-radius: 3px;
+}
+
+.custom-select-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ---------- 自定义颜色浮窗 ---------- */
+.controls {
+    position: relative; /* 浮窗定位基准 */
+}
+
+.color-popover {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 8px;
+    z-index: 50;
+    width: 250px;
+    background: var(--card);
+    border: 1px solid var(--mint-200);
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(31, 156, 136, 0.22);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.color-popover[hidden] {
+    display: none;
+}
+
+.popover-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+
+.color-popover input[type="color"] {
+    width: 100%;
+    height: 38px;
+    border: 1px solid var(--mint-200);
+    border-radius: 10px;
+    background: none;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.color-popover input[type="text"] {
+    width: 100%;
+    border: 1.5px solid var(--mint-200);
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-family: "Courier New", monospace;
+    color: var(--ink);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.color-popover input[type="text"]:focus {
+    border-color: var(--mint-500);
+    box-shadow: 0 0 0 3px rgba(46, 191, 166, 0.18);
+}
+
+.btn-small {
+    padding: 10px 0;
+    font-size: 13px;
+    border-radius: 10px;
+    flex: none;
+}
+
+/* ---------- 自定义色块：彩虹渐变 ---------- */
+.swatch.rainbow {
+    background: conic-gradient(#ff5f57, #ffbd2e, #29c43f, #00c0f0, #7b4fff, #ff5f57);
+}

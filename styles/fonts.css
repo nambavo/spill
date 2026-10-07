@@ -1,0 +1,16 @@
+/* ============================================================
+   fo/styles/fonts.css - 网络字体（Web Font）引入
+   集中托管两款第三方开源中文字体，供 Canvas 字母雨选用：
+     · 霞鹜文楷 LXGW WenKai      —— 官方 webfont 包（分片 woff2）
+     · 朱雀仿宋 Zhuque Fangsong  —— free-fonts 分片 woff2 包
+   两者均为按 unicode-range 切片，浏览器仅下载页面实际用到的字块。
+   字体族名（供 scripts/matrix-rain.js 引用）：
+     · LXGW WenKai
+     · Zhuque Fangsong
+   ============================================================ */
+
+/* 霞鹜文楷（含 LXGW WenKai / LXGW WenKai Mono），字体族名：LXGW WenKai */
+@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css");
+
+/* 朱雀仿宋，字体族名：Zhuque Fangsong */
+@import url("https://cdn.jsdelivr.net/npm/@free-fonts/zhuque-fangsong@1.0.0/zhuque-fangsong.css");

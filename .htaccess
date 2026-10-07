@@ -1,0 +1,50 @@
+# ============================================================
+# fo/.htaccess —— Apache / cPanel 类虚拟主机配置
+# 静态资源缓存（js/txt/css/json 等 1 天）+ 压缩 + 基础安全
+# ============================================================
+
+# ---------- 默认文档与字符集 ----------
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+
+# ---------- MIME 类型（部分主机未内置） ----------
+<IfModule mod_mime.c>
+    AddType text/plain .txt
+    AddType application/javascript .js
+    AddType application/json .json
+    AddType font/woff2 .woff2
+    AddType image/svg+xml .svg
+</IfModule>
+
+# ---------- Gzip 压缩（优化首屏传输体积） ----------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+    AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ---------- 缓存：js / txt / css / json / 字体 等 1 天 ----------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css                "access plus 1 day"
+    ExpiresByType text/javascript         "access plus 1 day"
+    ExpiresByType application/javascript  "access plus 1 day"
+    ExpiresByType text/plain              "access plus 1 day"
+    ExpiresByType application/json        "access plus 1 day"
+    ExpiresByType font/woff2              "access plus 1 day"
+    ExpiresByType image/svg+xml           "access plus 1 day"
+    ExpiresByType image/png               "access plus 1 day"
+    ExpiresByType image/jpeg              "access plus 1 day"
+    ExpiresByType image/x-icon            "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|txt|css|json|woff2|svg|png|jpe?g|ico)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+    # 基础安全：禁止 MIME 嗅探
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# ---------- 关闭目录列表 ----------
+Options -Indexes
