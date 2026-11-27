@@ -20,9 +20,9 @@
     // ===================== 迷你国际化（仅字母雨所需文案） =====================
     const TEXTS = {
         'zh-CN': {
-            enter: '🎮 欢迎进入宇宙源码！',
-            exit: '已退出宇宙源码模式',
-            konami: '🎮 Konami 码生效！欢迎进入宇宙源码！'
+            enter: '🎮 欢迎进入字母雨！',
+            exit: '已退出字母雨',
+            konami: '🎮 Konami 码生效！欢迎进入字母雨！'
         },
         'en-US': {
             enter: '🎮 Welcome to The Cosmic Code!',

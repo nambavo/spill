@@ -160,7 +160,6 @@ body {
     background: var(--card);
     color: var(--mint-700);
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(31, 156, 136, 0.18);
 }
 
 .segmented label:has(input:checked) {
